@@ -2,13 +2,35 @@
 <html lang="pl-PL">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>TODO App</title>
     <link href="css/main.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
+<form>
+    Title:<br>
+    <input type="text" id="title" required><br>
+    Date:<br>
+    <input type="date" id="date"><br>
+    Priority:<br>
+    <input type="radio" name="priority" value="1" checked> 1<br>
+    <input type="radio" name="priority" value="2"> 2<br>
+    <input type="radio" name="priority" value="3"> 3<br>
+    <input type="radio" name="priority" value="4"> 4<br>
+    <input type="radio" name="priority" value="5"> 5<br>
+    Description:<br>
+    <textarea name="done" id="textarea" cols="17" rows="5"></textarea><br>
+    Done:<br>
+    <input type="checkbox" id="check"><br>
 
+    <button type="submit">Add</button>
+    </p>
+
+    <div class="error-message">
+    </div>
+
+</form>
 
 </body>
 <script src="js/app.js"></script>
