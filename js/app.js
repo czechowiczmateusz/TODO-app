@@ -24,36 +24,31 @@ function getID() {
 var task = JSON.parse(localStorage.getItem('list') );
 // Tworzenie obiektu na klik
 var button = document.getElementById("btn");
+var errorMsg = document.querySelector('.error-message');
 button.addEventListener('click', function (e) {
     var taskObjects = new TasksObject();
-    tasks.push(taskObjects);
-    localStorage.setItem('list', JSON.stringify(tasks));
+    var error = false;
+
+    if( form.title.value.length <= 6) {
+        errorMsg.innerHTML += 'Title is too short<br>';
+        error = true;
+    }
+
+    if( form.textarea.value.length <= 20) {
+        errorMsg.innerHTML += 'Description is less than 20 characters<br>';
+        error = true;
+    }
+
+    if(error) {
+        e.preventDefault();
+    }
+
+    else {
+        tasks.push(taskObjects);
+        localStorage.setItem('list', JSON.stringify(tasks));
+    }
+
 });
-
-
-
-    // Walidacja formularza
-    var errorMsg = document.querySelector('.error-message');
-
-    form.addEventListener('submit', function(e) {
-        var error = false;
-
-        // Tytuł
-        if( this.elements.title.value.length <= 6) {
-            errorMsg.innerHTML += 'Title is too short<br>';
-            error = true;
-        };
-
-        // Opis
-        if( this.elements.textarea.value.length <= 20) {
-            errorMsg.innerHTML += 'Description is less than 20 characters<br>';
-            error = true;
-        };
-
-        if(error) {
-            e.preventDefault();
-        }
-    });
 
     // Aktualna data
     var today = new Date();
@@ -70,5 +65,6 @@ button.addEventListener('click', function (e) {
         mm = '0'+mm
     }
 
-    today = yyyy + "-" + mm + "-" + dd;
+    today = dd + "-" + mm + "-" + yyyy;
     date.value += today;
+
