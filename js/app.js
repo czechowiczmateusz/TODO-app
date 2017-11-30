@@ -13,24 +13,25 @@ function getID() {
      priority = form.priority.value;
      titles = form.title.value;
      describe = form.textarea.value;
+     check = form.checkbox.checked;
      id = getID();
      this.id = id;
      this.dateTask = date;
      this.priorityTask = priority;
      this.titleTask = titles;
      this.describeTask = describe;
+     this.checkTask = check;
 }
 //Local Storage odczyt
 var task = JSON.parse(localStorage.getItem('list') );
 // Tworzenie obiektu na klik
 var button = document.getElementById("btn");
+var errorMsg = document.querySelector('.error-message');
 
 button.addEventListener('click', function (e){
     var taskObjects = new TasksObject();
     var error = false;
-    var errorMsg = document.querySelector(".error-message");
 
-var errorMsg = document.querySelector('.error-message');
 button.addEventListener('click', function (e) {
     var taskObjects = new TasksObject();
     var error = false;
@@ -65,12 +66,6 @@ button.addEventListener('click', function (e) {
             error = true;
             errorMsg.innerHTML += 'Wrong day <br>'
         }
-    }
-
-
-    if( form.textarea.value.length <= 20) {
-        errorMsg.innerHTML += 'Description is less than 20 characters<br>';
-        error = true;
     }
 
     if(error) {
@@ -118,5 +113,65 @@ sortDown.addEventListener("click", function (e) {
     tasks.sort(dynamicSort("-dateTask"))
 });
 
-    today = dd + "-" + mm + "-" + yyyy;
-    date.value += today;
+
+var show = document.getElementById("showList");
+var list = document.querySelector(".list");
+
+show.addEventListener('click', function (e) {
+    if (localStorage.getItem('list') === null) {
+        errorMsg.style.display = "none";
+    } else {
+        var arr = JSON.parse(localStorage.getItem('list'));
+
+        arr.forEach(function (obj) {
+            var newUl = document.createElement('ul');
+            var newId = document.createElement('li');
+            var newTitle = document.createElement('li');
+            var newDescribe = document.createElement('li');
+            var newDate = document.createElement('li');
+            var newPriority = document.createElement('li');
+            var newDone = document.createElement('li');
+            var newButton = document.createElement('button');
+            newButton.innerHTML = "Done";
+
+
+            newId.innerHTML = obj.id;
+            newId.dataset.id = obj.id;
+            newTitle.innerHTML = obj.titleTask;
+            newTitle.addEventListener('mouseover', function () {
+                newDescribe.style.display = "block";
+                newDescribe.innerHTML = obj.describeTask;
+            });
+            newTitle.addEventListener('mouseout', function () {
+                newDescribe.style.display = "none";
+            });
+            newDate.innerHTML = obj.dateTask;
+            newPriority.innerHTML = obj.priorityTask;
+
+            if (obj.checkTask === true) {
+                newDone.innerHTML = "Done"
+                newDone.dataset.done = obj.dateTask;
+            } else {
+                newDone.innerHTML = "Not done";
+                newButton.addEventListener('click', function (e) {
+                    newDone.innerHTML = "Done";
+                    newDone.dataset.done = obj.dateTask;
+                    obj.checkTask = true;
+                    e.preventDefault();
+                })
+            }
+
+
+            newUl.appendChild(newId);
+            newUl.appendChild(newTitle);
+            newUl.appendChild(newDescribe);
+            newUl.appendChild(newDate);
+            newUl.appendChild(newPriority);
+            newUl.appendChild(newDone);
+            newUl.appendChild(newButton);
+            return list.appendChild(newUl);
+        });
+    }
+    e.preventDefault();
+
+});
