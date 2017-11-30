@@ -10,9 +10,13 @@
 
 <form>
     Title:<br>
-    <input type="text" id="title" required><br>
+    <input type="text" id="title" value=""><br>
     Date:<br>
+
+    <input type="date" id="date" value=""><br>
+
     <input type="text" id="date" required><br>
+
     Priority:<br>
     <input type="radio" name="priority" value="1" checked> 1<br>
     <input type="radio" name="priority" value="2"> 2<br>
@@ -20,12 +24,22 @@
     <input type="radio" name="priority" value="4"> 4<br>
     <input type="radio" name="priority" value="5"> 5<br>
     Description:<br>
-    <textarea name="done" id="textarea" cols="17" rows="5"></textarea><br>
+    <textarea name="done" id="textarea" cols="17" rows="5" value =""></textarea><br>
     Done:<br>
+
+    <input type="checkbox" id="check" value=""><br>
+
+    <button id="btn" type="button" >Add</button>
+
     <input type="checkbox" id="checkbox"><br>
 
     <button id="btn">Add</button>
+
     </p>
+    <div class="sortButtons">
+        <button id="sortUp" type="button">Rosnąco</button>
+        <button id="sortDown" type="button">Malejąco</button>
+    </div>
 
     <div class="error-message">
     </div>
