@@ -81,3 +81,12 @@ function dynamicSort(property) {
         return result * sortOrder;
     }
 }
+var sortUp = document.querySelector("#sortUp");
+var sortDown = document.querySelector("#sortDown");
+
+sortUp.addEventListener("click", function (e) {
+    tasks.sort(dynamicSort("dateTask"))
+});
+sortDown.addEventListener("click", function (e) {
+    tasks.sort(dynamicSort("-dateTask"))
+});
