@@ -149,15 +149,19 @@ show.addEventListener('click', function (e) {
             newPriority.innerHTML = obj.priorityTask;
 
             if (obj.checkTask === true) {
-                newDone.innerHTML = "Done"
+                newDone.innerHTML = "Done";
                 newDone.dataset.done = true;
-            } else {
+                newButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                })
+                }
+
+            if (obj.checkTask === false) {
                 newDone.innerHTML = "Not done";
                 newDone.dataset.done = false;
                 newButton.addEventListener('click', function (e) {
                     newDone.innerHTML = "Done";
                     newDone.dataset.done = true;
-                    obj.checkTask = true;
                     e.preventDefault();
                 })
             }
