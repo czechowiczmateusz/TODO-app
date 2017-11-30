@@ -150,12 +150,12 @@ show.addEventListener('click', function (e) {
 
             if (obj.checkTask === true) {
                 newDone.innerHTML = "Done"
-                newDone.dataset.done = obj.dateTask;
+                newDone.dataset.done = true;
             } else {
                 newDone.innerHTML = "Not done";
                 newButton.addEventListener('click', function (e) {
                     newDone.innerHTML = "Done";
-                    newDone.dataset.done = obj.dateTask;
+                    newDone.dataset.done = false;
                     obj.checkTask = true;
                     e.preventDefault();
                 })
