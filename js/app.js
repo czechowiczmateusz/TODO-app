@@ -24,15 +24,23 @@ function getID() {
 var task = JSON.parse(localStorage.getItem('list') );
 // Tworzenie obiektu na klik
 var button = document.getElementById("btn");
+
 button.addEventListener('click', function (e){
     var taskObjects = new TasksObject();
     var error = false;
     var errorMsg = document.querySelector(".error-message");
 
+var errorMsg = document.querySelector('.error-message');
+button.addEventListener('click', function (e) {
+    var taskObjects = new TasksObject();
+    var error = false;
+
+
     if( form.title.value.length <= 6) {
         errorMsg.innerHTML += 'Title is too short<br>';
         error = true;
     }
+
 
     if( form.textarea.value.length <= 20) {
         errorMsg.innerHTML += 'Description is less than 20 characters<br>';
@@ -59,6 +67,24 @@ button.addEventListener('click', function (e){
         }
     }
 
+
+    if( form.textarea.value.length <= 20) {
+        errorMsg.innerHTML += 'Description is less than 20 characters<br>';
+        error = true;
+    }
+
+    if(error) {
+        e.preventDefault();
+    }
+
+    else {
+        tasks.push(taskObjects);
+        localStorage.setItem('list', JSON.stringify(tasks));
+    }
+
+});
+
+
     if(error === true) {
         e.preventDefault();
     }
@@ -84,9 +110,13 @@ function dynamicSort(property) {
 var sortUp = document.querySelector("#sortUp");
 var sortDown = document.querySelector("#sortDown");
 
+
 sortUp.addEventListener("click", function (e) {
     tasks.sort(dynamicSort("dateTask"))
 });
 sortDown.addEventListener("click", function (e) {
     tasks.sort(dynamicSort("-dateTask"))
 });
+
+    today = dd + "-" + mm + "-" + yyyy;
+    date.value += today;
