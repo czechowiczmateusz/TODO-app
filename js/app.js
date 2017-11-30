@@ -153,9 +153,10 @@ show.addEventListener('click', function (e) {
                 newDone.dataset.done = true;
             } else {
                 newDone.innerHTML = "Not done";
+                newDone.dataset.done = false;
                 newButton.addEventListener('click', function (e) {
                     newDone.innerHTML = "Done";
-                    newDone.dataset.done = false;
+                    newDone.dataset.done = true;
                     obj.checkTask = true;
                     e.preventDefault();
                 })
