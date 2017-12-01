@@ -78,6 +78,7 @@
             else {
                 errorMsg.innerHTML = "";
                 tasks.push(taskObjects);
+                localStorage.setItem('list', JSON.stringify(tasks));
 
 
                 // Tworzenie elementów
@@ -124,13 +125,6 @@
                                 newUl.classList.add("done");
                             });
                         }
-                        else {
-                            newButton.addEventListener('click', function (e) {
-                                newDone.innerHTML = "Not done";
-                                newDone.dataset.done = false;
-                                newUl.classList.remove("done");
-                            });
-                        }
 
                         newUl.appendChild(newId);
                         newUl.appendChild(newTitle);
@@ -146,10 +140,6 @@
             }
             console.log(tasks.sort(dynamicSort("dateTask")));
         });
-
-
-
-
 
         // Sortowanie po dacie
         function dynamicSort(property) {
