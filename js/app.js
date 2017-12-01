@@ -16,14 +16,13 @@
                 priority = form.priority.value;
                 titles = form.title.value;
                 describe = form.textarea.value;
-                check = form.checkbox.checked;
                 id = getID();
                 this.id = id;
                 this.dateTask = date;
                 this.priorityTask = priority;
                 this.titleTask = titles;
                 this.describeTask = describe;
-                this.checkTask = check;
+                this.isCompletedTask = false;
              }
 
         //Local Storage odczyt
@@ -117,7 +116,7 @@
 
             newPriority.innerHTML = obj.priorityTask;
 
-            if (obj.checkTask === false) {
+            if (obj.isCompletedTask === false) {
                 newDone.innerHTML = "Not done";
                 newDone.dataset.done = false;
                 newButton.addEventListener('click', function (e) {
