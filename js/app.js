@@ -28,10 +28,8 @@ var task = JSON.parse(localStorage.getItem('list') );
 var button = document.getElementById("btn");
 var errorMsg = document.querySelector('.error-message');
 
-button.addEventListener('click', function (e){
-    var taskObjects = new TasksObject();
-    var error = false;
 
+// Dodawanie elementów
 button.addEventListener('click', function (e) {
     var taskObjects = new TasksObject();
     var error = false;
@@ -68,18 +66,6 @@ button.addEventListener('click', function (e) {
         }
     }
 
-    if(error) {
-        e.preventDefault();
-    }
-
-    else {
-        tasks.push(taskObjects);
-        localStorage.setItem('list', JSON.stringify(tasks));
-    }
-
-});
-
-
     if(error === true) {
         e.preventDefault();
     }
@@ -91,6 +77,66 @@ button.addEventListener('click', function (e) {
     console.log(tasks.sort(dynamicSort("dateTask")));
 });
 
+// Tworzenie elementów
+
+var show = document.getElementById("showList");
+var list = document.querySelector(".list");
+
+
+if (localStorage.getItem('list') === null) {
+    errorMsg.style.display = "none";
+} else {
+    var arr = JSON.parse(localStorage.getItem('list'));
+
+    arr.forEach(function (obj) {
+        var newUl = document.createElement('ul');
+        var newId = document.createElement('li');
+        var newTitle = document.createElement('li');
+        var newDescribe = document.createElement('li');
+        var newDate = document.createElement('li');
+        var newPriority = document.createElement('li');
+        var newDone = document.createElement('li');
+        var newButton = document.createElement('button');
+        newButton.innerHTML = "Done";
+
+
+        newId.innerHTML = obj.id;
+        newId.dataset.id = obj.id;
+        newTitle.innerHTML = obj.titleTask;
+        newTitle.addEventListener('mouseover', function () {
+            newDescribe.style.display = "block";
+            newDescribe.innerHTML = obj.describeTask;
+        });
+        newTitle.addEventListener('mouseout', function () {
+            newDescribe.style.display = "none";
+        });
+        newDate.innerHTML = obj.dateTask;
+        newPriority.innerHTML = obj.priorityTask;
+
+        if (obj.checkTask === false) {
+            newDone.innerHTML = "Not done";
+            newDone.dataset.done = false;
+            newButton.addEventListener('click', function (e) {
+                newDone.innerHTML = "Done";
+                newDone.dataset.done = true;
+                e.preventDefault();
+            })
+        }
+
+
+        newUl.appendChild(newId);
+        newUl.appendChild(newTitle);
+        newUl.appendChild(newDescribe);
+        newUl.appendChild(newDate);
+        newUl.appendChild(newPriority);
+        newUl.appendChild(newDone);
+        newUl.appendChild(newButton);
+        list.appendChild(newUl);
+    });
+}
+
+
+// Sortowanie po dacie
 function dynamicSort(property) {
     var sortOrder = 1;
     if(property[0] === "-") {
@@ -114,69 +160,10 @@ sortDown.addEventListener("click", function (e) {
 });
 
 
-var show = document.getElementById("showList");
-var list = document.querySelector(".list");
-
-show.addEventListener('click', function (e) {
-    if (localStorage.getItem('list') === null) {
-        errorMsg.style.display = "none";
-    } else {
-        var arr = JSON.parse(localStorage.getItem('list'));
-
-        arr.forEach(function (obj) {
-            var newUl = document.createElement('ul');
-            var newId = document.createElement('li');
-            var newTitle = document.createElement('li');
-            var newDescribe = document.createElement('li');
-            var newDate = document.createElement('li');
-            var newPriority = document.createElement('li');
-            var newDone = document.createElement('li');
-            var newButton = document.createElement('button');
-            newButton.innerHTML = "Done";
 
 
-            newId.innerHTML = obj.id;
-            newId.dataset.id = obj.id;
-            newTitle.innerHTML = obj.titleTask;
-            newTitle.addEventListener('mouseover', function () {
-                newDescribe.style.display = "block";
-                newDescribe.innerHTML = obj.describeTask;
-            });
-            newTitle.addEventListener('mouseout', function () {
-                newDescribe.style.display = "none";
-            });
-            newDate.innerHTML = obj.dateTask;
-            newPriority.innerHTML = obj.priorityTask;
-
-            if (obj.checkTask === true) {
-                newDone.innerHTML = "Done";
-                newDone.dataset.done = true;
-                newButton.addEventListener('click', function (e) {
-                    e.preventDefault();
-                })
-                }
-
-            if (obj.checkTask === false) {
-                newDone.innerHTML = "Not done";
-                newDone.dataset.done = false;
-                newButton.addEventListener('click', function (e) {
-                    newDone.innerHTML = "Done";
-                    newDone.dataset.done = true;
-                    e.preventDefault();
-                })
-            }
 
 
-            newUl.appendChild(newId);
-            newUl.appendChild(newTitle);
-            newUl.appendChild(newDescribe);
-            newUl.appendChild(newDate);
-            newUl.appendChild(newPriority);
-            newUl.appendChild(newDone);
-            newUl.appendChild(newButton);
-            return list.appendChild(newUl);
-        });
-    }
-    e.preventDefault();
 
-});
+
+//
