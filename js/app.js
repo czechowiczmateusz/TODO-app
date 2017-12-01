@@ -23,6 +23,7 @@
                 this.titleTask = titles;
                 this.describeTask = describe;
                 this.isCompletedTask = false;
+                this.data = localStorage.data;
              }
 
         //Local Storage odczyt
@@ -77,67 +78,68 @@
             else {
                 tasks.push(taskObjects);
                 localStorage.setItem('list', JSON.stringify(tasks));
+
+                // Tworzenie elementów
+                var list = document.querySelector(".list");
+
+                if (localStorage.getItem('list') === null) {
+                    errorMsg.style.display = "none";
+                } else {
+                    var arr = JSON.parse(localStorage.getItem('list'));
+                    list.innerHTML = "";
+
+                    arr.forEach(function (obj) {
+                        var newUl = document.createElement('ul');
+                        var newId = document.createElement('li');
+                        var newTitle = document.createElement('li');
+                        var newDescribe = document.createElement('li');
+                        var newDate = document.createElement('li');
+                        var newPriority = document.createElement('li');
+                        var newDone = document.createElement('li');
+                        var newButton = document.createElement('button');
+                        newButton.innerHTML = "Done";
+
+                        newId.innerHTML = obj.id;
+                        newId.dataset.id = obj.id;
+                        newTitle.innerHTML = obj.titleTask;
+                        newTitle.addEventListener('mouseover', function () {
+                            newDescribe.style.display = "block";
+                            newDescribe.innerHTML = obj.describeTask;
+                        });
+                        newTitle.addEventListener('mouseout', function () {
+                            newDescribe.style.display = "none";
+                        });
+
+                        newDate.innerHTML = obj.dateTask;
+
+                        newPriority.innerHTML = obj.priorityTask;
+
+                        if (obj.isCompletedTask === false) {
+                            newDone.innerHTML = "Not done";
+                            newDone.dataset.done = false;
+                            newButton.addEventListener('click', function (e) {
+                                newDone.innerHTML = "Done";
+                                newDone.dataset.done = true;
+                                newUl.style.backgroundColor = "red";
+
+                                e.preventDefault();
+                            })
+                        }
+
+                        newUl.appendChild(newId);
+                        newUl.appendChild(newTitle);
+                        newUl.appendChild(newDescribe);
+                        newUl.appendChild(newDate);
+                        newUl.appendChild(newPriority);
+                        newUl.appendChild(newDone);
+                        newUl.appendChild(newButton);
+                        list.appendChild(newUl);
+                    });
+                }
             }
             console.log(tasks.sort(dynamicSort("dateTask")));
         });
 
-        // Tworzenie elementów
-        var list = document.querySelector(".list");
-
-        if (localStorage.getItem('list') === null) {
-            errorMsg.style.display = "none";
-        } else {
-            var arr = JSON.parse(localStorage.getItem('list'));
-
-        arr.forEach(function (obj) {
-            var newUl = document.createElement('ul');
-            var newId = document.createElement('li');
-            var newTitle = document.createElement('li');
-            var newDescribe = document.createElement('li');
-            var newDate = document.createElement('li');
-            var newPriority = document.createElement('li');
-            var newDone = document.createElement('li');
-            var newButton = document.createElement('button');
-            newButton.innerHTML = "Done";
-
-            newId.innerHTML = obj.id;
-            newId.dataset.id = obj.id;
-
-            newTitle.innerHTML = obj.titleTask;
-            newTitle.addEventListener('mouseover', function () {
-                newDescribe.style.display = "block";
-                newDescribe.innerHTML = obj.describeTask;
-            });
-            newTitle.addEventListener('mouseout', function () {
-                newDescribe.style.display = "none";
-            });
-
-            newDate.innerHTML = obj.dateTask;
-
-            newPriority.innerHTML = obj.priorityTask;
-
-            if (obj.isCompletedTask === false) {
-                newDone.innerHTML = "Not done";
-                newDone.dataset.done = false;
-                newButton.addEventListener('click', function (e) {
-                    newDone.innerHTML = "Done";
-                    newDone.dataset.done = true;
-                    newUl.style.backgroundColor = "red";
-                    e.preventDefault();
-                })
-            }
-
-
-            newUl.appendChild(newId);
-            newUl.appendChild(newTitle);
-            newUl.appendChild(newDescribe);
-            newUl.appendChild(newDate);
-            newUl.appendChild(newPriority);
-            newUl.appendChild(newDone);
-            newUl.appendChild(newButton);
-            list.appendChild(newUl);
-        });
-        }
 
 
         // Sortowanie po dacie
