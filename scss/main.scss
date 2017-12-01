@@ -1,3 +1,97 @@
-textarea {
-  resize: none;
+@import "partials/reset";
+
+$main-color: #36ff19;
+
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: black;
+  color: white;
+}
+main, section {
+  background-color: black;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  .container {
+    width: 1000px;
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 600px;
+    text-transform: uppercase;
+    h1 {
+      font-size: 40px;
+    }
+    .title, .date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      input {
+        width: 400px;
+        border: 2px solid $main-color;
+        margin: 10px;
+      }
+    }
+    .description {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      height: 100px;
+      textarea {
+        resize: none;
+        margin: 10px;
+        width: 400px;
+        border: 2px solid $main-color;
+      }
+    }
+    .priority {
+      height: 50px;
+      text-align: center;
+    }
+    button {
+      margin: 10px;
+      height: 30px;
+      width: 200px;
+      color: white;
+      background-color: black;
+      border: 2px solid $main-color;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 300px;
+    align-items: center;
+    border: 2px solid $main-color;
+    transition: 2s;
+    justify-content: center;
+    li {
+      margin: 5px;
+    }
+    button {
+      margin: 10px;
+      height: 50px;
+      width: 200px;
+      color: white;
+      background-color: black;
+      border: 2px solid $main-color;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+  }
+  .done {
+    background-color: $main-color;
+    transition: 2s;
+  }
 }

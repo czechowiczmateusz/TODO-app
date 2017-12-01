@@ -8,38 +8,59 @@
 </head>
 <body>
 
-<form>
-    Title:<br>
-    <input type="text" id="title" value=""><br>
-    Date:<br>
-    <input type="text" id="date"><br>
+<main>
+    <div class="container">
+    <form>
+        <h1>TODO App</h1>
+        <div class="title">
+            Title:
+            <input type="text" id="title" value="">
+        </div>
 
-    Priority:<br>
-    <input type="radio" name="priority" value="1" checked> 1<br>
-    <input type="radio" name="priority" value="2"> 2<br>
-    <input type="radio" name="priority" value="3"> 3<br>
-    <input type="radio" name="priority" value="4"> 4<br>
-    <input type="radio" name="priority" value="5"> 5<br>
-    Description:<br>
-    <textarea name="done" id="textarea" cols="17" rows="5" value =""></textarea><br>
+        <div class="date">
+        Date:
+        <input type="text" id="date">
+        </div>
 
-    <button id="btn" type="button" >Add</button>
+        <div class="priority">
+        Priority:<br>
+        1<input type="radio" name="priority" value="1" checked>
+        2<input type="radio" name="priority" value="2">
+        3<input type="radio" name="priority" value="3">
+        4<input type="radio" name="priority" value="4">
+        5<input type="radio" name="priority" value="5">
+        </div>
+
+        <div class="description">
+        Description:
+        <textarea name="done" id="textarea" rows="20"></textarea>
+        </div>
+
+        <div class="addButton">
+        <button id="btn" type="button" >Add</button>
+        </div>
+
+        <div class="sortButtons">
+            <button id="sortUp" type="button">Rosnąco</button>
+            <button id="sortDown" type="button">Malejąco</button>
+        </div>
 
 
-    </p>
-    <div class="sortButtons">
-        <button id="sortUp" type="button">Rosnąco</button>
-        <button id="sortDown" type="button">Malejąco</button>
+
     </div>
-    </p>
+    </form>
+</main>
+    <section>
+        <div class="container">
+            <div class="error-message">
+            </div>
 
-    <div class="error-message">
-    </div>
+            <div class="list">
+            </div>
+        </div>
+    </section>
 
-    <div class="list">
-    </div>
 
-</form>
 
 </body>
 <script src="js/app.js"></script>
