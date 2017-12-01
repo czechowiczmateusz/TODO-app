@@ -76,13 +76,6 @@ main, section {
     border: 2px solid $main-color;
     transition: 2s;
     justify-content: center;
-    animation: fadeIn 0.5s linear;
-    animation-fill-mode: both;
-    @for $i from 1 through 50 {
-      ul:nth-child(#{$i}) {
-        animation-delay: .25s * $i;
-      }
-    }
     li {
       margin: 5px;
     }
@@ -98,7 +91,7 @@ main, section {
     }
   }
   .done {
-    background-color: $main-color;
+    background-color: #005f00;
     transition: 2s;
   }
 }
